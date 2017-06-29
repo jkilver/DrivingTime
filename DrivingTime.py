@@ -18,6 +18,8 @@ def SavePlot(sample_times, driving_times):
     title = calendar.day_name[dt.date.today().weekday() - 1]
     filename = '.\\Plots\\' + title + '.png'
 
+    print 'Saving ' + filename
+
     # Save the figure
     plt.savefig(filename)
 
@@ -50,6 +52,7 @@ if __name__ == "__main__":
         # Add the driving time to the list
         driving_time = result['rows'][0]['elements'][0]['duration']['value']/60.0
         driving_times.append(driving_time)
+        print "Driving time at " + str(current) + " is " + str(driving_time) + " minutes"
 
         # Determine if we need to switch the data sets over and save off the plots
         if current.day != prev_time.day:
@@ -57,5 +60,8 @@ if __name__ == "__main__":
             sample_times[:] = []
             driving_times[:] = []
 
+        # Update the previous time variable  
+        prev_time = current
+
         # Wait 5 minutes
-        time.sleep(5)
+        time.sleep(300)
