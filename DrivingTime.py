@@ -19,7 +19,7 @@ def SavePlot(sample_times, to_work, from_work):
     df.plot()
 
     # Create file name
-    title = dt.date.today()
+    title = str(dt.date.today())
     filename = '.\\Plots\\' + title + '.png'
 
     print 'Saving ' + filename
@@ -27,6 +27,7 @@ def SavePlot(sample_times, to_work, from_work):
     # Save the figure
     plt.savefig(filename)
     df.to_csv('.\\Files\\' + title + '.csv')
+    plt.close()
 
 
 if __name__ == "__main__":
@@ -47,11 +48,11 @@ if __name__ == "__main__":
 
     while True:
         # Get the current date and time
-        current = dt.datetime.now()
-        sample_times.append(current)
+        current = dt.datetime.now()       
 
         # Determine if we need to switch the data sets over
         if current.day != prev_time.day:   
+            print "Clearing arrays"
             sample_times[:] = []
             times_to_work[:] = []
             times_from_work[:] = []
@@ -67,8 +68,16 @@ if __name__ == "__main__":
 
             times_to_work.append(time_to_work)
             times_from_work.append(time_from_work)
+            sample_times.append(current)
             print "At time " + str(current) + " driving time to work is " + str(time_to_work) + " minutes. Driving time from work is " + str(time_from_work)
         except:
+            # Force lists to be the same length
+            if len(sample_times) != len(times_to_work):
+                times_to_work = times_to_work[:len(sample_times)]
+            
+            if len(sample_times) != len(times_from_work):
+                times_from_work = times_from_work[:len(sample_times)]
+            
             e = sys.exc_info()[0]
             print "Error getting travel time: ", e
             
