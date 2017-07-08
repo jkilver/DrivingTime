@@ -22,13 +22,13 @@ def SavePlot(sample_times, to_work, from_work):
 
     # Create file name
     title = str(dt.date.today())
-    filename = '.\\Plots\\' + title + '.png'
+    filename = './/Plots//' + title + '.png'
 
     print 'Saving ' + filename
 
     # Save the figure
     plt.savefig(filename)
-    df.to_csv('.\\Files\\' + title + '.csv')
+    df.to_csv('.//Files//' + title + '.csv')
     plt.close()
 
 
