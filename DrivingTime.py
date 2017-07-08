@@ -3,6 +3,8 @@
 import simplejson, urllib
 import pandas as pd
 import datetime as dt
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import time
 import calendar
@@ -30,8 +32,7 @@ def SavePlot(sample_times, to_work, from_work):
     plt.close()
 
 
-if __name__ == "__main__":
-
+if __name__ == "__main__":    
     # API Key
     # AIzaSyDwGmIteahxi5ixK0P2aL055lIzhnMgvHA 
 
@@ -89,4 +90,4 @@ if __name__ == "__main__":
         prev_time = current
 
         # Wait 5 minutes
-        time.sleep(300)
+        time.sleep(5)
